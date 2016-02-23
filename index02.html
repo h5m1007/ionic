@@ -12,15 +12,18 @@
 	<ion-side-menus>
 		<ion-side-menu-content>
 			<ion-header-bar class="bar-dark">
-				<h1 class="title">Todo</h1>
-
+				<!-- <h1 class="title">Todo</h1> -->
+				<button class="button button-icon" ng-click="toggleProjects()">
+					<i class="icon ion-navicon"></i>
+				</button>
+				<h1 class="title">{{activeProject.title}}</h1>
 				<button class="button button-icon" ng-click="newTask()">
 					<i class="icon ion-compose"></i>
 				</button>
 			</ion-header-bar>
-			<ion-content>
+			<ion-content scroll="false">
 				<ion-list>
-					<ion-item ng-repeat="task in tasks">
+					<ion-item ng-repeat="task in activeProject.tasks">
 						{{task.title}}
 					</ion-item>
 				</ion-list>
@@ -28,9 +31,18 @@
 		</ion-side-menu-content>
 
 		<ion-side-menu side="left">
+		<!-- 左侧滑动菜单 -->
 			<ion-header-bar class="bar-dark">
 				<h1 class="title">Project</h1>
+				<button class="button button-icon ion-plus" ng-click="newProject()"></button>
 			</ion-header-bar>
+			<ion-content scroll="false">
+				<ion-list>
+					<ion-item ng-repeat="project in projects" ng-click="selectProject(project,$index)" ng-class="{active:activeProject == project}">
+						{{project.title}}
+					</ion-item>
+				</ion-list>
+			</ion-content>
 		</ion-side-menu>
 	</ion-side-menus>
 
@@ -45,16 +57,16 @@
 
 			<ion-content>
 				<form ng-submit="createTask(task)">
-				<div class="list">
-					<label class="item itme-input">
-						<input type="text" placeholder="What do you need to do?" ng-model="task.title">
-					</label>
-				</div>
-				<div class="padding">
-				<button type="submit" class="button button-block button-positive">
-					Create Task
-				</button>
-				</div>
+					<div class="list">
+						<label class="item itme-input">
+							<input type="text" placeholder="What do you need to do?" ng-model="task.title">
+						</label>
+					</div>
+					<div class="padding">
+					<button type="submit" class="button button-block button-positive">
+						Create Task
+					</button>
+					</div>
 				</form>
 			</ion-content>
 		</div>
