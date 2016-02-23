@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="ionicApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>ionic01</title>
+	<link rel="stylesheet" type="text/css" href="ionic-v1.2.4\css\ionic.min.css">
+	<script type="text/javascript" src="ionic-v1.2.4\js\ionic.bundle.min.js"></script>
+	<script type="text/javascript">
+		angular.module('ionicApp',['ionic'])
+		.controller('MyCtrl',function($scope){
+
+		});
+	</script>
+	<style type="text/css">
+		body{
+			cursor:url('http://www.runoob.com/static/img/finger.png'),auto;
+		}
+	</style>
+</head>
+<body ng-controller="MyCtrl">
+	<ion-header-bar class="bar-positive">
+		<h1 class="title">Hello World!</h1>
+	</ion-header-bar>
+	<ion-content>
+		<p>My First Ionic App!</p>
+	</ion-content>
+</body>
+</html>
