@@ -61,7 +61,37 @@ angular.module('todo', ['ionic'])
     		if(!$scope.activeProject || !task){
     			return;
     		}
-    		$scope.activeProject.tasks.push();
-    	}
+    		$scope.activeProject.tasks.push({
+                title: task.title
+            });
+            $scope.taskModal.hide();
+
+            Projects.save($scope.projects);
+            task.title = "";
+    	};
+
+        $scope.newTask = function(){
+            $scope.taskModal.show();
+        };
+
+        $scope.closeNewTask = function(){
+            $scope.taskModal.hide();
+        };
+
+        $scope.toggleProjects = function(){
+            $ionicSideMenuDelegate.toggleLeft();
+        };
+
+        $timeout(function(){
+            if($scope.projects.length == 0){
+                while(true){
+                    var projectTitle = prompt('Your first project title:');
+                    if(projectTitle){
+                        createProject(projectTitle);
+                        break;
+                    }
+                }
+            }
+        });
 
     })
