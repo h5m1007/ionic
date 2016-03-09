@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>ionic01</title>
+	<link rel="stylesheet" type="text/css" href="ionic-v1.2.4\css\ionic.min.css">
+    <script type="text/javascript" src="ionic-v1.2.4\js\ionic.bundle.min.js"></script>
+</head>
+<body ng-app="ezApp" ng-controller="ezCtrl">
+	<!-- 视图容器 -->
+	<ion-nav-view>
+		<img src="http://www.runoob.com/try/demo_source/delorean.jpg" alt="">
+	</ion-nav-view>
+
+	<ion-footer-bar>
+		<div class="button-bar">
+			<a href="" class="button" ng-click="go('state1');">state1</a>
+			<a href="" class="button" ng-click="go('state2');">state2</a>
+			<a href="" class="button" ng-click="go('state3');">state3</a>
+		</div>
+	</ion-footer-bar>
+
+	<!-- 子视图 -->
+	<script id="state1.html" type="text/ng-template">
+		<p>这个内容在状态为state1时显示</p>
+		<img src="http://www.runoob.com/try/demo_source/delorean.jpg" alt="">
+	</script>
+	<script id="state2.html" type="text/ng-template">
+		<p>这个内容在状态为state2时显示</p>
+		<img src="http://www.runoob.com/try/demo_source/delorean.jpg" alt="">
+	</script>
+	<script id="state3.html" type="text/ng-template">
+		<p>这个内容在状态为state3时显示</p>
+		<img src="http://www.runoob.com/try/demo_source/delorean.jpg" alt="">
+	</script>
+
+	<script>
+		angular.module('ezApp',['ionic'])
+		.config(function($stateProvider){
+			// 配置状态机的各个状态
+			$stateProvider
+			.state("state1",{templateUrl:"state1.html"})
+			.state("state2",{templateUrl:"state2.html"})
+			.state("state3",{templateUrl:"state3.html"});
+		})
+		.controller('ezCtrl',function($scope,$state){
+			$scope.go = function(state){
+				$state.go(state);
+			};
+		});
+
+	</script>
+</body>
+</html>

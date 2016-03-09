@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>ionic09</title>
+    <link rel="stylesheet" type="text/css" href="ionic-v1.2.4\css\ionic.min.css">
+    <script type="text/javascript" src="ionic-v1.2.4\js\ionic.bundle.min.js"></script>
+</head>
+
+<body ng-app="starter" ng-controller="actionsheetCtrl">
+    <ion-pane>
+        <ion-content>
+            <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()">
+            </ion-refresher>
+            <ion-list>
+                <ion-item ng-repeat="item in items" ng-bind="item.name">
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-pane>
+    <script>
+    angular.module('starter', ['ionic'])
+        .controller('actionsheetCtrl', function($scope, $timeout, $http) {
+            $scope.items = [{
+                "name": "HTML5"
+            }, {
+                "name": "JavaScript"
+            }, {
+                "name": "Css3"
+            }];
+
+            $scope.doRefresh = function() {
+                $http.get("index09.json")
+                    .success(function(newItems) {
+                        $scope.items = newItems;
+                    })
+                    .finally(function() {
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+            };
+        })
+    </script>
+</body>
+
+</html>

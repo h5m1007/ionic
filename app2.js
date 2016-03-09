@@ -14,11 +14,11 @@ angular.module('todo', ['ionic'])
             newProject: function(projectTitle) {
                 return {
                     title: projectTitle,
-                    task: []
+                    tasks: []
                 };
             },
             getLastActiveIndex: function() {
-            	return parseInt(window.localStorage['LastActiveIndex']) || 0;
+            	return parseInt(window.localStorage['lastActiveProject']) || 0;
             },
             setLastActiveIndex: function(index){
             	window.localStorage['lastActiveProject'] = index;

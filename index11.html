@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>ionic11</title>
+	<link rel="stylesheet" type="text/css" href="ionic-v1.2.4\css\ionic.min.css">
+    <script type="text/javascript" src="ionic-v1.2.4\js\ionic.bundle.min.js"></script>
+    <style>
+		.onDrag{
+			width: 150px;
+			height: 100px;
+			margin: 0 auto;
+			text-align: center;
+		}
+    </style>
+</head>
+<body ng-app="starter" ng-controller="actionsheetCtrl">
+	<button on-hold="onHold()" class="button">长按执行！</button>
+	<hr>
+	<button class="button" on-tap="onTap()">轻击执行！</button>
+	<hr>
+	<button class="button" on-double-tap="onDoubleTap()">双击执行！</button>
+	<hr>
+	<button class="button" on-release="onRelease()">离开执行！</button>
+	<hr>
+	<div class="onDrag" on-drag="onDrag()">拖拽执行！</div>
+	<div class="onDrag" on-drag-left="onDragLeft()">向左拖拽执行！</div>
+	<div class="onDrag" on-swipe="onSwipe()">
+		手指滑动执行！
+		<i class="icon {{icon}}"></i>
+	</div>
+	<script>
+		angular.module('starter',['ionic'])
+		.controller('actionsheetCtrl',function($scope){
+			$scope.onHold = function(){
+				alert("on-hold");
+			};
+			$scope.onTap = function(){
+				alert("on-tap");
+			};
+			$scope.onDoubleTap = function(){
+				alert("on-double-tap");
+			};
+			$scope.onRelease = function(){
+				alert("on-release");
+			};
+			$scope.onDrag = function(){
+				console.log("onDrag");
+			};
+			$scope.onDragLeft = function(){
+				console.log("onDragLeft");
+			};
+			$scope.icon = "ion-arrow-expand";
+			$scope.onSwipe = function(){
+				$scope.icon = "ion-arrow-down-a";
+			}
+		})
+	</script>
+</body>
+</html>

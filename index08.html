@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>ionic08</title>
+    <link rel="stylesheet" type="text/css" href="ionic-v1.2.4\css\ionic.min.css">
+    <script type="text/javascript" src="ionic-v1.2.4\js\ionic.bundle.min.js"></script>
+</head>
+
+<body ng-app="starter" ng-controller="actionsheetCtrl">
+    <ion-pane>
+        <ion-content>
+            <h2 ng-click="action()">$ionicBackdrop</h2>
+        </ion-content>
+    </ion-pane>
+    <script>
+    angular.module('starter', ['ionic'])
+        .controller('actionsheetCtrl', function($scope, $timeout, $ionicBackdrop) {
+            $scope.action = function() {
+                $ionicBackdrop.retain();
+                $timeout(function() {
+                    $ionicBackdrop.release();
+                }, 1000);
+            };
+        })
+    </script>
+</body>
+
+</html>
