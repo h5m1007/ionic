@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ezApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>ionic02</title>
+    <link rel="stylesheet" type="text/css" href="ionic-v1.2.4\css\ionic.min.css">
+    <script type="text/javascript" src="ionic-v1.2.4\js\ionic.bundle.min.js"></script>
+</head>
+
+<body ng-controller="ezCtrl">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">ion-content</h1>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+            <!-- 上拉刷新（对数组返回的数据用unshift做处理） -->
+        </ion-refresher>
+        <ul class="list">
+            <li class="item" ng-repeat="item in items">{{item}}</li>
+        </ul>
+        <ion-infinite-scroll on-infinite="load_more()">
+            <!-- 滚动刷新（对数组返回的数据用push做处理） -->
+        </ion-infinite-scroll>
+    </ion-content>
+    <ion-footer-bar class="bar-positive">
+		<a href="" class="button" ng-click="gotop()">GO TOP!</a>
+		<a href="" class="button" ng-click="gobottom()">GO BOTTOM!</a>
+	</ion-footer-bar>
+    <script>
+    angular.module('ezApp', ['ionic'])
+        .controller('ezCtrl', function($scope,$timeout,$ionicScrollDelegate) {
+            $scope.items = [];
+            var base = 1;
+            var scroll = 0;
+            // 上拉刷新
+            // $scope.doRefresh = function() {
+            //     for (var i = 0; i < 50; i++, base++) {
+            //         $scope.items.unshift(['item in line', base].join(""));
+            //     }
+            //     $scope.$broadcast("scroll.refreshComplete");
+            // };
+
+            $scope.load_more = function() {
+                $timeout(function() {
+                    for (var i = 0; i < 20; i++, scroll++) {
+                        $scope.items.push(["item in line", scroll].join(""));
+                    }
+                    $scope.$broadcast("scroll.infiniteScrollComplete");
+                }, 500);
+            };
+
+            $scope.gotop = function(){
+            	$ionicScrollDelegate.scrollTop(true);
+            };
+            $scope.gobottom = function(){
+            	$ionicScrollDelegate.scrollBottom(true);
+            };
+        });
+    </script>
+</body>
+
+</html>
